@@ -1,4 +1,4 @@
-package eci.edu.byteprogramming.ejercicio.paper;
+package eci.edu.byteProgramming.ejercicio.paper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

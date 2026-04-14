@@ -1,4 +1,4 @@
-package eci.edu.byteprogramming.ejercicio.paper.util;
+package eci.edu.byteProgramming.ejercicio.paper.util;
 
 public class Notification {
     private String companyName = "ECI Payments";

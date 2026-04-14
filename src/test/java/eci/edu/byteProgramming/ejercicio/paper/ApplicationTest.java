@@ -1,4 +1,4 @@
-package eci.edu.byteprogramming.ejercicio.paper;
+package eci.edu.byteProgramming.ejercicio.paper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

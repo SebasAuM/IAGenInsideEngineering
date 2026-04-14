@@ -1,4 +1,4 @@
-package eci.edu.byteprogramming.ejercicio.paper.util;
+package eci.edu.byteProgramming.ejercicio.paper.util;
 
 import java.util.ArrayList;
 import java.util.List;
