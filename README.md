@@ -94,7 +94,49 @@ Descuento (20%): $2.600
 Total a pagar: $10.400
 --------------------------
 ¡Disfrute su pelicula!
+
 ```
+
+* Promt solucion del problema, la IA usada fue chatgpt
+
+
+Te voy a enviar un ejercicio que tengo que realizar, necesito que lo hagas siguiendo correctamente y coherentemente todo lo que dice el ejerciccio, si tienes dudas me preguntas, necesito que me generes el codigo correcto segun exactamente lo que dice el enunciado y documentado pero explicando cada linea de codigo. Necesito que seas preciso y profesional. En java el codigo, Don Mario acaba de abrir un videoclub moderno donde los clientes pueden alquilar peliculas fisicas o digitales. El problema es que su sistema anterior era un caos: todos los precios se calculaban igual sin importar el tipo de pelicula o membresia del cliente, y no habia forma de saber que peliculas estaban disponibles en tiempo real.
+### Tu Mision
+Ayuda a Don Mario creando un sistema de alquiler que permita:
+1. Registrar peliculas (fisicas o digitales) con su disponibilidad.
+2. Que el cliente elija X peliculas para alquilar.
+3. Calcular el precio total segun su tipo de membresia:
+   - Basica: precio normal.
+   - Premium: 20% de descuento.
+4. Mostrar al finalizar un recibo con las peliculas, precio por unidad y total.
+### Peliculas Disponibles
+- [Fisica] Interestellar - $8.000 - Disponible
+- [Fisica] El Padrino - $7.000 - No disponible
+- [Digital] Inception - $5.000 - Disponible
+- [Digital] Matrix - $6.000 - Disponible
+### Caso de Ejemplo
+Membresia del cliente: Premium  
+Seleccione peliculas (numeros separados por coma): 1,3
+text
+--- RECIBO DE ALQUILER ---
+Cliente: Premium
+Peliculas:
+ - Interestellar (Fisica) - $8.000
+ - Inception (Digital) - $5.000
+Subtotal: $13.000
+Descuento (20%): $2.600
+Total a pagar: $10.400
+--------------------------
+¡Disfrute su pelicula!
+
+### Objetivos del Ejercicio
+- Identificar cual o cuales patrones de diseno utilizar.
+- Explicar que principios de SOLID se aplican.
+- Aplicar polimorfismo y encapsulamiento.
+- Colocar evidencia de la ejecucion del ejercicio (ejecucion por consola; no es necesario hacer front).
+
+
+
 
 ### Objetivos del Ejercicio
 
