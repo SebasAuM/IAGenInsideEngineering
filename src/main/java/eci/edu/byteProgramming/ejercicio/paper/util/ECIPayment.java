@@ -3,7 +3,9 @@ package eci.edu.byteProgramming.ejercicio.paper.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ECIPayment {
+
+public class ECIPayment  {
+
     private List<PaymentObserver> observers;
     
     public ECIPayment() {
@@ -18,7 +20,7 @@ public class ECIPayment {
         observers.remove(observer);
     }
     
-    public boolean processPayment(PaymentFactory factory, double amount, String customerId, 
+    public boolean processPayment(PaymentMethod factory, double amount, String customerId, 
                                 String description, String customerName, String customerEmail, String productId) {
         
         System.out.println("🚀 ECI Payments: Starting payment process...");

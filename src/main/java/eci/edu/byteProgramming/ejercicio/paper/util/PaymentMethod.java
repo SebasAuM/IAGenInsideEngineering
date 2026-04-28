@@ -24,6 +24,9 @@ public abstract class PaymentMethod implements ValidatePayment{
     public abstract boolean processPayment();
     public abstract String getPaymentMethod();
 
+
+    public abstract PaymentMethod createPaymentMethod(double amount, String customerId, String description);
+
     protected String generateTransactionId() {
         
         long timestamp = System.currentTimeMillis();
