@@ -1,0 +1,182 @@
+import java.util.*; // Importa utilidades como ArrayList y Scanner
+
+// Clase abstracta que representa una Película
+abstract class Pelicula {
+    protected String nombre; // Nombre de la película
+    protected double precio; // Precio de alquiler
+    protected boolean disponible; // Disponibilidad
+
+    // Constructor
+    public Pelicula(String nombre, double precio, boolean disponible) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.disponible = disponible;
+    }
+
+    // Método abstracto para obtener el tipo (Fisica o Digital)
+    public abstract String getTipo();
+
+    // Getter para el nombre
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Getter para el precio
+    public double getPrecio() {
+        return precio;
+    }
+
+    // Getter para disponibilidad
+    public boolean isDisponible() {
+        return disponible;
+    }
+}
+
+// Clase concreta para Película Física
+class PeliculaFisica extends Pelicula {
+
+    // Constructor que llama al de la clase padre
+    public PeliculaFisica(String nombre, double precio, boolean disponible) {
+        super(nombre, precio, disponible);
+    }
+
+    // Implementación del tipo
+    @Override
+    public String getTipo() {
+        return "Fisica";
+    }
+}
+
+// Clase concreta para Película Digital
+class PeliculaDigital extends Pelicula {
+
+    // Constructor
+    public PeliculaDigital(String nombre, double precio, boolean disponible) {
+        super(nombre, precio, disponible);
+    }
+
+    // Implementación del tipo
+    @Override
+    public String getTipo() {
+        return "Digital";
+    }
+}
+
+// Interfaz para estrategia de cálculo de precio
+interface EstrategiaPrecio {
+    double calcularTotal(double subtotal);
+    double calcularDescuento(double subtotal);
+}
+
+// Estrategia para membresía básica
+class MembresiaBasica implements EstrategiaPrecio {
+
+    @Override
+    public double calcularTotal(double subtotal) {
+        return subtotal; // No hay descuento
+    }
+
+    @Override
+    public double calcularDescuento(double subtotal) {
+        return 0; // No hay descuento
+    }
+}
+
+// Estrategia para membresía premium
+class MembresiaPremium implements EstrategiaPrecio {
+
+    @Override
+    public double calcularTotal(double subtotal) {
+        return subtotal * 0.8; // Aplica 20% de descuento
+    }
+
+    @Override
+    public double calcularDescuento(double subtotal) {
+        return subtotal * 0.2; // Calcula el descuento
+    }
+}
+
+// Clase principal del sistema
+public class VideoClub {
+
+    public static void main(String[] args) {
+
+        // Lista de películas disponibles en el sistema
+        List<Pelicula> peliculas = new ArrayList<>();
+
+        // Agregamos las películas según el enunciado
+        peliculas.add(new PeliculaFisica("Interestellar", 8000, true));
+        peliculas.add(new PeliculaFisica("El Padrino", 7000, false));
+        peliculas.add(new PeliculaDigital("Inception", 5000, true));
+        peliculas.add(new PeliculaDigital("Matrix", 6000, true));
+
+        Scanner scanner = new Scanner(System.in); // Para leer datos del usuario
+
+        // Solicitar tipo de membresía
+        System.out.print("Ingrese tipo de membresia (Basica/Premium): ");
+        String tipoMembresia = scanner.nextLine();
+
+        // Seleccionar estrategia según membresía (Patrón Strategy)
+        EstrategiaPrecio estrategia;
+        if (tipoMembresia.equalsIgnoreCase("Premium")) {
+            estrategia = new MembresiaPremium();
+        } else {
+            estrategia = new MembresiaBasica();
+        }
+
+        // Mostrar películas disponibles
+        System.out.println("Peliculas disponibles:");
+        for (int i = 0; i < peliculas.size(); i++) {
+            Pelicula p = peliculas.get(i);
+            System.out.println((i + 1) + ". " + p.getNombre() + " (" + p.getTipo() + ") - $" + p.getPrecio()
+                    + " - " + (p.isDisponible() ? "Disponible" : "No disponible"));
+        }
+
+        // Solicitar selección
+        System.out.print("Seleccione peliculas (numeros separados por coma): ");
+        String input = scanner.nextLine();
+
+        String[] seleccion = input.split(","); // Divide los números
+
+        List<Pelicula> seleccionadas = new ArrayList<>();
+        double subtotal = 0;
+
+        // Procesar selección
+        for (String s : seleccion) {
+            int index = Integer.parseInt(s.trim()) - 1;
+
+            if (index >= 0 && index < peliculas.size()) {
+                Pelicula p = peliculas.get(index);
+
+                // Solo agregar si está disponible
+                if (p.isDisponible()) {
+                    seleccionadas.add(p);
+                    subtotal += p.getPrecio();
+                } else {
+                    System.out.println("La pelicula " + p.getNombre() + " no esta disponible.");
+                }
+            }
+        }
+
+        // Calcular descuento y total
+        double descuento = estrategia.calcularDescuento(subtotal);
+        double total = estrategia.calcularTotal(subtotal);
+
+        // Mostrar recibo
+        System.out.println("\n--- RECIBO DE ALQUILER ---");
+        System.out.println("Cliente: " + tipoMembresia);
+        System.out.println("Peliculas:");
+
+        for (Pelicula p : seleccionadas) {
+            System.out.println(" - " + p.getNombre() + " (" + p.getTipo() + ") - $" + p.getPrecio());
+        }
+
+        System.out.println("Subtotal: $" + subtotal);
+        System.out.println("Descuento: $" + descuento);
+        System.out.println("Total a pagar: $" + total);
+        System.out.println("--------------------------");
+        System.out.println("¡Disfrute su pelicula!");
+
+        scanner.close(); // Cerrar scanner
+    }
+}
